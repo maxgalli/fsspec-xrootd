@@ -997,12 +997,7 @@ class XRootDFile(AbstractBufferedFile):  # type: ignore[misc]
             raise ValueError("I/O operation on closed file.")
         if self.forced:
             raise ValueError("This file has been force-flushed, can only close")
-        status, _n = self._myFile.write(
-            data, 
-            self.loc,
-            len(data), 
-            timeout=self.timeout
-        )
+        status, _n = self._myFile.write(data, self.loc, len(data), timeout=self.timeout)
         self.loc += len(data)
         self.size = max(self.size, self.loc)
         if not status.ok:
